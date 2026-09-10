@@ -1,0 +1,321 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+/* ============================================================
+   1. TOKENS BASE Y SISTEMA VISUAL (Emirates UI System)
+   ============================================================ */
+:root {
+  --accent-color: #18181b;
+  --bg-canvas: #dcdfe5;
+  --surface-app: #f1f3f6;
+  --surface-card: #ffffff;
+
+  --shell-strong: #536460;
+  --shell-soft: #ffffff;
+
+  --pastel-green: #e2f3e8;
+  --pastel-rose: #fce8e8;
+
+  --text-primary: #18181b;
+  --text-muted: #71717a;
+  --border-subtle: rgba(255, 255, 255, 0.8);
+
+  --shadow-app: 0 20px 40px rgba(0, 0, 0, 0.08);
+  --shadow-card: 0 4px 16px rgba(0, 0, 0, 0.03);
+  --shadow-floating: 0 12px 30px rgba(0, 0, 0, 0.22);
+}
+
+body {
+  background-color: var(--bg-canvas);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, sans-serif;
+  letter-spacing: -0.02em;
+  -webkit-font-smoothing: antialiased;
+}
+
+.no-scrollbar::-webkit-scrollbar { display: none; }
+.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+.app-viewport {
+  background: var(--surface-app);
+  border-radius: 0;
+  box-shadow: none;
+  scroll-behavior: smooth;
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .app-viewport {
+    border-radius: 32px;
+    box-shadow: var(--shadow-app);
+    border: 1px solid var(--border-subtle);
+  }
+}
+
+/* ============================================================
+   2. TARJETAS Y CONTENEDORES DISEÑADOS
+   ============================================================ */
+.bento-card {
+  background: var(--surface-card);
+  border-radius: 20px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.03);
+  min-width: 0;
+}
+
+.dark-glass-card {
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  backdrop-filter: blur(8px);
+}
+
+.hero-accent-card {
+  background-color: var(--accent-color) !important;
+  color: #ffffff;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  transition: background-color 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  min-width: 0;
+}
+
+.badge-positive { background-color: rgba(21, 128, 61, 0.12); color: #15803d; border-radius: 12px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+.badge-negative { background-color: rgba(190, 18, 60, 0.12); color: #be123c; border-radius: 12px; padding: 2px 8px; font-size: 11px; font-weight: 600; }
+.bg-pastel-green { background-color: var(--pastel-green); }
+.bg-pastel-rose { background-color: var(--pastel-rose); }
+
+.capitalize-input { text-transform: capitalize; }
+
+.quick-add-row {
+  display: flex; align-items: center; gap: 12px; width: 100%;
+  padding: 12px 14px; border-radius: 18px;
+  background: #ffffff; border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.02);
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+.quick-add-row:hover { background: #f8fafc; }
+.quick-add-row:active { transform: scale(0.98); }
+.quick-add-icon {
+  width: 38px; height: 38px; border-radius: 12px;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+
+.sync-toast {
+  position: fixed; top: 14px; left: 50%;
+  transform: translate(-50%, -60px);
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  border: 1px solid rgba(0, 0, 0, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+  z-index: 100;
+  opacity: 0;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.sync-toast.active { transform: translate(-50%, 0); opacity: 1; }
+
+.sync-spinner {
+  width: 12px; height: 12px;
+  border: 2px solid rgba(0, 0, 0, 0.15);
+  border-top-color: var(--shell-strong);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* ============================================================
+   3. SHELL — INVERSIÓN Y TIPOGRAFÍA FLUIDA
+   ============================================================ */
+#app-root { transition: background-color 0.4s ease-in-out; }
+
+.theme-bg-header, .theme-bg-card { transition: background-color 0.4s ease-in-out, color 0.4s ease-in-out; }
+
+.theme-diario .theme-bg-header { background: var(--shell-soft); }
+.theme-diario .theme-text-header { color: var(--shell-strong); }
+.theme-diario .theme-bg-card { background: var(--shell-strong); color: #ffffff; }
+.theme-diario .theme-muted-header { color: rgba(83, 100, 96, 0.65); }
+
+.theme-mensual .theme-bg-header { background: var(--shell-strong); }
+.theme-mensual .theme-text-header { color: #ffffff; }
+.theme-mensual .theme-bg-card { background: var(--surface-app); color: var(--text-primary); }
+.theme-mensual .theme-muted-header { color: rgba(255, 255, 255, 0.7); }
+
+#root-title { cursor: pointer; user-select: none; }
+#root-title-text {
+  font-size: clamp(1.8rem, 6vw, 2.25rem);
+  font-weight: 800;
+  letter-spacing: -0.03em;
+  line-height: 1.05;
+}
+
+#btn-header-left { width: 32px; height: 32px; display: flex; align-items: center; justify-content: center; }
+#btn-header-left .menu-line { display: block; height: 2px; border-radius: 999px; background: currentColor; }
+#btn-header-left .menu-line + .menu-line { margin-top: 5px; }
+#btn-header-left[data-mode="none"] { visibility: hidden; }
+
+.header-avatar {
+  width: 40px; height: 40px; border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 700; font-size: 13px;
+  border: 1.5px solid currentColor; opacity: 0.45;
+  transition: opacity 0.25s ease, background-color 0.25s ease, border-width 0.25s ease;
+}
+.header-avatar.avatar-active { opacity: 1; border-width: 2px; }
+.theme-diario .header-avatar.avatar-active { background: rgba(83, 100, 96, 0.08); }
+.theme-mensual .header-avatar.avatar-active { background: rgba(255, 255, 255, 0.15); }
+
+.sync-caption { font-size: 10px; font-weight: 500; text-align: right; }
+
+/* ============================================================
+   4. SISTEMA DE PANTALLAS Y CONTAINER QUERIES
+   ============================================================ */
+.app-screen { display: none; flex-direction: column; }
+.app-screen.screen-active {
+  display: flex;
+  animation: screen-in 0.32s cubic-bezier(0.16, 1, 0.3, 1);
+}
+@keyframes screen-in {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+#app-card {
+  position: relative;
+  border-radius: 36px 36px 0 0;
+  overflow-y: auto;
+  container-type: inline-size;
+}
+@media (min-width: 640px) { #app-card { border-radius: 36px; } }
+
+#today-budget-display {
+  font-size: clamp(2rem, 9cqw, 3.25rem);
+  line-height: 1.05;
+  word-break: break-word;
+  overflow-wrap: anywhere;
+}
+
+/* ============================================================
+   5. PESTAÑAS SEGMENTADAS (CORREGIDO SIN SUPERPOSICIÓN NI STRIKETHROUGH)
+   ============================================================ */
+.seg-tabs-container {
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  padding-top: 14px;
+  margin-top: 8px;
+}
+
+.seg-tabs {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  position: relative;
+}
+
+.seg-tab {
+  position: relative;
+  padding-bottom: 8px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  opacity: 0.5;
+  background: none;
+  border: none;
+  color: inherit;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: opacity 0.25s ease;
+}
+
+.seg-tab::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: currentColor;
+  border-radius: 999px;
+  opacity: 0;
+  transform: scaleX(0.5);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.seg-tab.active {
+  opacity: 1;
+}
+
+.seg-tab.active::after {
+  opacity: 1;
+  transform: scaleX(1);
+}
+
+/* ============================================================
+   6. SELECTOR DE DÍAS EN CHIPS
+   ============================================================ */
+.day-chip-row { display: flex; align-items: center; gap: 8px; overflow-x: auto; padding: 6px 0; }
+.day-chip {
+  flex: 0 0 auto; width: 58px; padding: 10px 0;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  border-radius: 18px; text-align: center; color: #fff;
+  transition: background-color 0.2s ease, color 0.2s ease, border-color 0.2s ease, transform 0.15s ease;
+}
+.day-chip .day-chip-dow { display: block; font-size: 10px; opacity: 0.75; text-transform: uppercase; font-weight: 600; }
+.day-chip .day-chip-num { display: block; font-size: 18px; font-weight: 800; line-height: 1.2; }
+.day-chip.selected { background: #ffffff; color: var(--shell-strong); border-color: #ffffff; transform: scale(1.03); }
+.day-chip-nav {
+  flex: 0 0 auto; width: 30px; height: 30px; border-radius: 9999px;
+  display: flex; align-items: center; justify-content: center;
+  color: rgba(255, 255, 255, 0.8);
+  background: rgba(255, 255, 255, 0.1);
+}
+
+/* ============================================================
+   7. FILAS DE CAMPO CON ÍCONO (Emirates UI style)
+   ============================================================ */
+.field-row {
+  display: flex; align-items: center; gap: 12px;
+  padding: 10px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  min-width: 0;
+}
+.field-icon {
+  flex: 0 0 auto; width: 32px; height: 32px; border-radius: 9999px;
+  border: 1.5px solid rgba(255, 255, 255, 0.5);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700;
+}
+.field-row input {
+  flex: 1; background: transparent; border: none; outline: none;
+  color: #fff; font-size: 15px; font-weight: 600; min-width: 0;
+}
+.field-row input::placeholder { color: rgba(255, 255, 255, 0.45); font-weight: 500; }
+
+.field-checkbox-row { display: flex; align-items: center; gap: 10px; padding: 12px 0; border-bottom: 1px solid rgba(255, 255, 255, 0.18); }
+.field-checkbox-row .checkbox-circle {
+  width: 20px; height: 20px; border-radius: 9999px; border: 1.5px solid rgba(255, 255, 255, 0.6);
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.field-checkbox-row input:checked ~ .checkbox-circle { background: #fff; }
+.field-checkbox-row input { display: none; }
+
+/* ============================================================
+   8. FAB CONTEXTUAL
+   ============================================================ */
+#fab-primary, #fab-secondary {
+  position: absolute; bottom: 20px; z-index: 20;
+  height: 56px; min-width: 56px; padding: 0 20px;
+  border-radius: 28px; display: flex; align-items: center; justify-content: center;
+  box-shadow: var(--shadow-floating);
+  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+#fab-primary:active, #fab-secondary:active { transform: scale(0.92); }
+#fab-primary { right: 20px; }
+#fab-secondary { left: 20px; }
+#fab-secondary.hidden { display: none; }
+
+.theme-diario #fab-primary, .theme-diario #fab-secondary { background: var(--shell-soft); color: var(--shell-strong); }
+.theme-mensual #fab-primary, .theme-mensual #fab-secondary { background: var(--shell-strong); color: #ffffff; }
+
+/* ============================================================
+   9. SWATCHES DE ACENTO
+   ============================================================ */
+.accent-swatch { width: 32px; height: 32px; border-radius: 9999px; border: 2px solid transparent; transition: border-color 0.2s ease, transform 0.15s ease; }
+.accent-swatch:active { transform: scale(0.9); }
+.accent-swatch.selected { border-color: var(--text-primary); }
+.theme-diario .accent-swatch.selected { border-color: #ffffff; }
